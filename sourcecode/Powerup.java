@@ -2,14 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package radarproject2.pkg0;
+package radarproject;
 
 import java.awt.Color;
 import java.awt.Polygon;
 
 /**
- *
+ * This class extends the Polygon class and creates a small triangle of various
+ *  sizes.
  * @author probs
+ * 
  */
 public class Powerup extends Polygon{
     
@@ -17,6 +19,13 @@ public class Powerup extends Polygon{
     private int[] dx,dy;
     private Color color;
     private double dr, theta, drad;
+
+    /**
+     * This constructor creates an Powerup with health, the angle theta, and the specific powerup
+     * @param theta The angle from the center to the Powerup on the outside of the circle
+     * @param health The health of the Powerup
+     * @param powerup The value of the Powerup, differentiates different powerups
+     */
     public Powerup(double theta, int health, int powerup){
         // List of powerups
         /*
@@ -72,9 +81,18 @@ public class Powerup extends Polygon{
             }
         }
     }
+
+    /**
+     * This method returns the color of the Powerup
+     * @return Returns the color of the Powerup
+     */
     public Color getColor(){
         return color;
     }
+
+    /**
+     * This method moves the Powerup towards the center of the circle
+     */
     public void move(){
         for (int i = 0; i < xpoints.length; i++) {
             xpoints[i] = (int)(350-300*Math.cos(theta-Math.PI)+dr*Math.cos(theta-Math.PI))-dx[i];
@@ -82,12 +100,27 @@ public class Powerup extends Polygon{
         }
         dr = dr+drad;
     }
+
+    /**
+     * This method gets the health of the Powerup
+     * @return Returns the health of the Powerup
+     */
     public int getHealth(){
         return health;
     }
+
+    /**
+     * This sets the health of the Powerup
+     * @param health The health of the Powerup that the user wishes to set.
+     */
     public void setHealth(int health){
         this.health = health;
     }
+
+    /**
+     * This gets the center X value of the Powerup.
+     * @return Returns the center X value of the Powerup
+     */
     public int getCenterX(){
         int sum =0;
         int i = 0;
@@ -97,6 +130,11 @@ public class Powerup extends Polygon{
         }
         return sum/i;
     }
+
+    /**
+     * This gets the center Y value of the Powerup.
+     * @return Returns the center Y value of the Powerup
+     */
     public int getCenterY(){
         int sum =0;
         int i = 0;
@@ -106,6 +144,11 @@ public class Powerup extends Polygon{
         }
         return sum/i;
     }
+
+    /**
+     * This gets the maximum value of X in the X-points array
+     * @return Returns the maximum value of X
+     */
     public int getMaxX(){
         int max=xpoints[0];
         for (int x : xpoints) {
@@ -115,6 +158,11 @@ public class Powerup extends Polygon{
         }
         return max;
     }
+
+    /**
+     * This gets the maximum value of Y in the Y-points array
+     * @return Returns the maximum value of Y
+     */
     public int getMaxY(){
         int max=ypoints[0];
         for (int y : ypoints) {
@@ -124,6 +172,11 @@ public class Powerup extends Polygon{
         }
         return max;
     }
+
+    /**
+     * This gets the minimum value of X in the X-points array
+     * @return Returns the minimum value of X
+     */
     public int getMinX(){
         int min=xpoints[0];
         for (int x : xpoints) {
@@ -133,6 +186,11 @@ public class Powerup extends Polygon{
         }
         return min;
     }
+
+    /**
+     * This gets the minimum value of Y in the Y-points array
+     * @return Returns the minimum value of Y
+     */
     public int getMinY(){
         int min=ypoints[0];
         for (int y : ypoints) {
@@ -142,6 +200,11 @@ public class Powerup extends Polygon{
         }
         return min;
     }
+
+    /**
+     * This returns the powerup value of the Powerup
+     * @return Returns the integer value of the variable powerup
+     */
     public int getPowerup(){
         return this.powerup;
     }

@@ -2,20 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package radarproject2.pkg0;
+package radarproject;
 
 import java.awt.Color;
 import java.awt.Polygon;
 
 /**
- *
+ * This class extends the Polygon class and creates a small triangle of various
+ *  sizes.
  * @author probs
+ * 
  */
 public class Enemy extends Polygon {
     private int health, origHealth;
     private int[] dx,dy;
     private Color color;
     private double dr, theta, drad;
+
+    /**
+     * This constructor creates an Enemy with health, and the angle theta
+     * @param theta The angle from the center to the Enemy on the outside of the circle
+     * @param health The health of the Enemy
+     */
     public Enemy(double theta, int health){
         color = Color.RED;
         this.health=health;
@@ -55,9 +63,18 @@ public class Enemy extends Polygon {
             }
         }
     }
+
+    /**
+     * This method returns the color of the Enemy
+     * @return Returns the color of the Enemy
+     */
     public Color getColor(){
         return color;
     }
+
+    /**
+     * This method moves the Enemy towards the center of the circle
+     */
     public void move(){
         for (int i = 0; i < xpoints.length; i++) {
             xpoints[i] = (int)(350-300*Math.cos(theta-Math.PI)+dr*Math.cos(theta-Math.PI))-dx[i];
@@ -65,12 +82,27 @@ public class Enemy extends Polygon {
         }
         dr = dr+drad;
     }
+
+    /**
+     * This method gets the health of the Enemy
+     * @return Returns the health of the Enemy
+     */
     public int getHealth(){
         return health;
     }
+
+    /**
+     * This sets the health of the Enemy
+     * @param health The health of the Enemy that the user wishes to set.
+     */
     public void setHealth(int health){
         this.health = health;
     }
+
+    /**
+     * This gets the center X value of the Enemy.
+     * @return Returns the center X value of the Enemy
+     */
     public int getCenterX(){
         int sum =0;
         int i = 0;
@@ -80,6 +112,11 @@ public class Enemy extends Polygon {
         }
         return sum/i;
     }
+
+    /**
+     * This gets the center Y value of the Enemy.
+     * @return Returns the center Y value of the Enemy
+     */
     public int getCenterY(){
         int sum =0;
         int i = 0;
@@ -89,6 +126,11 @@ public class Enemy extends Polygon {
         }
         return sum/i;
     }
+
+    /**
+     * This gets the maximum value of X in the X-points array
+     * @return Returns the maximum value of X
+     */
     public int getMaxX(){
         int max=xpoints[0];
         for (int x : xpoints) {
@@ -98,6 +140,11 @@ public class Enemy extends Polygon {
         }
         return max;
     }
+
+    /**
+     * This gets the maximum value of Y in the Y-points array
+     * @return Returns the maximum value of Y
+     */
     public int getMaxY(){
         int max=ypoints[0];
         for (int y : ypoints) {
@@ -107,6 +154,11 @@ public class Enemy extends Polygon {
         }
         return max;
     }
+
+    /**
+     * This gets the minimum value of X in the X-points array
+     * @return Returns the minimum value of X
+     */
     public int getMinX(){
         int min=xpoints[0];
         for (int x : xpoints) {
@@ -116,6 +168,11 @@ public class Enemy extends Polygon {
         }
         return min;
     }
+
+    /**
+     * This gets the minimum value of Y in the Y-points array
+     * @return Returns the minimum value of Y
+     */
     public int getMinY(){
         int min=ypoints[0];
         for (int y : ypoints) {
@@ -125,6 +182,11 @@ public class Enemy extends Polygon {
         }
         return min;
     }
+
+    /**
+     * This gets the health of the original Enemy, before deduction/damage
+     * @return Returns the original health of Enemy
+     */
     public int getOrigHealth(){
         return origHealth;
     }

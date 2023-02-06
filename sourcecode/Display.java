@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package radarproject2.pkg0;
+package radarproject;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,12 +27,11 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
- *
+ * This class extends the JPanel class and creates the main screen of the game.
  * @author probs
  */
 public class Display extends JPanel{
     private ImageIcon radar;
-    private URL radarFile;
     private Sweeper sweeper, secondSweeper;
     private Color sweeperColor;
     private Timer EnemyMovementTimer, EnemySpawnTimer, sweeperTimer, bulletTimer, powerupTimer,
@@ -51,6 +49,10 @@ public class Display extends JPanel{
     private SoundPlayer shooting, hurt, explosion, powerupSound;
     private MusicPlayer backgroundMusic;
     
+    /**
+     * This constructor creates a Display object for the main game. Initializes 
+     * all values and objects for the rest of the game.
+     */
     public Display(){
         super();
         radar = new ImageIcon(getClass().getClassLoader().getResource("background.png"));
@@ -82,16 +84,21 @@ public class Display extends JPanel{
         bullets = new ArrayList<>();
         powerup = new ArrayList<>();
         try{
-            shooting = new SoundPlayer(".//resources//sf_laser_18.wav");
+            shooting = new SoundPlayer("sf_laser_18.wav");
             hurt = new SoundPlayer("classic_hurt.wav");
             explosion = new SoundPlayer("explosion.wav");
             powerupSound = new SoundPlayer("powerup.wav");
             backgroundMusic = new MusicPlayer("backgroundMusic.wav");
         }
-        catch(Exception e){};
+        catch(Exception e){}
         addMouseListener(new BulletListener());
     }
     
+    /**
+     * This method overrides the JPanel method. This runs the motion of the 
+     * game.
+     * @param g The graphics object given by the JPanel (turns into a Graphics2D object)
+     */
     @Override
     public void paintComponent (Graphics g){
         try{
@@ -389,21 +396,51 @@ public class Display extends JPanel{
         }
         catch(IndexOutOfBoundsException e){}
     }
+
+    /**
+     * This method returns if the mouse is moving
+     * @return Returns true if the mouse is moving, and false if it is not
+     */
     public boolean getIsMoving(){
         return isMoving;
     }
+
+    /**
+     * This method sets the value of isMoving to show the mouse is moving
+     * @param isMoving User-given value to show if the mouse is moving
+     */
     public void setIsMoving(boolean isMoving){
         this.isMoving = isMoving;
     }
+
+    /**
+     * This method sets the x value of the crosshair
+     * @param x The user-given x value of the crosshair
+     */
     public void setCrossX(int x){
         crossX = x;
     }
+
+    /**
+     * This method sets the y value of the crosshair
+     * @param y The user-given y value of the crosshair
+     */
     public void setCrossY(int y){
         crossY = y;
     }
+
+    /**
+     * This method returns the boolean value of gameOver, to show if the game has ended
+     * @return Returns true if the game is over, and false if the game is not over.
+     */
     public boolean getGameOver(){
         return gameOver;
     }
+
+    /**
+     * This method gets the current score of the game.
+     * @return Returns the score of the game
+     */
     public int getScore(){
         return score;
     }
@@ -619,8 +656,8 @@ public class Display extends JPanel{
                 UnsupportedAudioFileException, 
                 IOException, 
                 LineUnavailableException{
-            fileResource = getClass().getResource(path);
-            audioStream = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
+            fileResource = getClass().getClassLoader().getResource(path);
+            audioStream = AudioSystem.getAudioInputStream(fileResource);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
         }
@@ -635,11 +672,13 @@ public class Display extends JPanel{
     private class MusicPlayer{
         private Clip clip;
         private AudioInputStream audioStream;
+        private URL fileResource;
         public MusicPlayer(String path)throws 
                 UnsupportedAudioFileException, 
                 IOException, 
                 LineUnavailableException{
-                audioStream = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
+                fileResource = getClass().getClassLoader().getResource(path);
+                audioStream = AudioSystem.getAudioInputStream(fileResource);
                 clip = AudioSystem.getClip();
                 clip.open(audioStream);
                 clip.start();

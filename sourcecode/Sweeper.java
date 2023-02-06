@@ -2,19 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package radarproject2.pkg0;
+package radarproject;
 
 import java.awt.Polygon;
 
 /**
- *
+ * This class extends the Polygon class and creates a Sweeper
  * @author probs
  */
 public class Sweeper extends Polygon{
     private double theta, dtheta, radius;
     private int circleWidth = 305*2;
     private double radarTheta = Math.PI/190;
-    private int index=0;
+
+    /**
+     * This constructor creates a Sweeper starting at the top
+     */
     public Sweeper (){
         npoints = 20;
         xpoints = new int[npoints];
@@ -32,12 +35,27 @@ public class Sweeper extends Polygon{
         ypoints[19] = ypoints[0];
         theta = 0;
     }
+
+    /**
+     * This method sets the DTheta of the Sweeper (how large the Sweeper is)
+     * @param theta The user given value of DTheta
+     */
     public void setDTheta (double theta){
         dtheta = theta;
     }
+
+    /**
+     * This method gets the value of DTheta
+     * @return Returns the value of DTheta
+     */
     public double getDTheta (){
         return dtheta;
     }
+
+    /**
+     * This method rotates the Sweeper around the origin by editing the 
+     * x-points and y-points arrays
+     */
     public void rotate(){
         // xpoints[0] and ypoints[0] will stay the same.
         // Take the xpoints and ypoints ahead of the one at i, and replace it.
@@ -54,6 +72,12 @@ public class Sweeper extends Polygon{
         }
         // xpoints[19] and ypoints[19] will stay the same
     }
+
+    /**
+     * This method tests for intersections for Polygons
+     * @param poly The polygon that is being tested for intersection
+     * @return Returns true if the Sweeper intersects, or False if it doesn't
+     */
     public boolean intersects (Polygon poly){
         boolean isIntersect = false;
         int xMax=xpoints[0],yMax=ypoints[0],xMin=xMax,yMin=yMax,polyXMax=poly.xpoints[0],polyYMax=poly.ypoints[0],polyXMin=polyXMax,polyYMin=polyYMax;

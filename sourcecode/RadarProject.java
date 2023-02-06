@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package radarproject2.pkg0;
+package radarproject;
 
 /**
- *
+ * This drives the game, only calls GUI
  * @author probs
  */
 public class RadarProject {

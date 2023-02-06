@@ -2,17 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package radarproject2.pkg0;
+package radarproject;
 
 import java.awt.Polygon;
-import java.awt.Rectangle;
 
 /**
- *
+ * This class returns a crosshair for the Radar Game. It is en extension of the 
+ * polygon class, and uses x-points and y-points in order to have a square with 
+ * small indentations towards the middle of the screen, where the pointer 
+ * should point
  * @author probs
  */
 public class Crosshair extends Polygon{
     private int x,y;
+
+    /**
+     * This constructor returns a Crosshair object that is based on the value of
+     *  the cursor, which is (x,y)
+     * @param x This parameter is the x value of the cursor
+     * @param y This parameter is the y value of the cursor
+     */
     public Crosshair(int x, int y){
         this.x = x;
         this.y = y;
@@ -70,11 +79,24 @@ public class Crosshair extends Polygon{
         xpoints[24] = xpoints[0];
         ypoints[24] = ypoints[0];
     }
+
+    /**
+     * This method tests to see if it intersects the Enemy. It tests the center point 
+     * of the Enemy and the boundaries of the crosshair, and see if they are within each other.
+     * @param enemy This is an Enemy that tests to see if it intersects the Crosshair
+     * @return Returns true if the Enemy intersects, and false if it doesn't
+     */
     public boolean intersects (Enemy enemy){
         return (enemy.getCenterX()>x-25 && enemy.getCenterX()<x+25 && enemy.getCenterY()>y-25 && enemy.getCenterY()<y+25);
     }
 
-    boolean intersects(Powerup powerup) {
+    /**
+     * This method tests to see if it intersects the Powerup. It tests the center point 
+     * of the Powerup and the boundaries of the crosshair, and see if they are within each other.
+     * @param powerup This is a Powerup that tests to see if it intersects the Crosshair
+     * @return Returns true if it intersects, and false if it doesn't
+     */
+    public boolean intersects(Powerup powerup) {
         return (powerup.getCenterX()>x-25 && powerup.getCenterX()<x+25 && powerup.getCenterY()>y-25 && powerup.getCenterY()<y+25);
     }
 }

@@ -2,20 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package radarproject2.pkg0;
+package radarproject;
 
-import java.awt.Color;
 import java.awt.Polygon;
 
 /**
- *
+ * This class is an extension of the Polygon class, and creates a "Bullet" to 
+ * allow for shooting in the game.
  * @author probs
  */
 public class Bullet extends Polygon{
-    private Color color;
     private double angle, dr, drad;
     private int[] dx, dy;
     private int damage;
+
+    /**
+     * 
+     * @param x The x component in which the Bullet is going to
+     * @param y The y component in which the Bullet is going to
+     * @param damage The amount of damage that the individual Bullet has
+     */
     public Bullet(int x, int y, int damage){
         this.damage = damage;
         npoints = 20;
@@ -69,6 +75,10 @@ public class Bullet extends Polygon{
             }
         }
     }
+
+    /**
+     * This method moves the Bullet towards the destination from the constructor.
+     */
     public void move(){
         for (int i = 0; i < xpoints.length; i++) {
             xpoints[i] = (int)(350-1*Math.cos(-angle-Math.PI)-dr*Math.cos(-angle-Math.PI))-dx[i];
@@ -76,9 +86,20 @@ public class Bullet extends Polygon{
         }
         dr = dr+drad;
     }
+
+    /**
+     * This method gets the damage of the Bullet
+     * @return This returns the damage of the Bullet
+     */
     public int getDamage(){
         return damage;
     }
+
+    /**
+     * This method sets the damage of the individual Bullet
+     * @param damage This is the damage that the user wishes to give to the Bullet
+     * 
+     */ 
     public void setDamage(int damage){
         if(damage<0){
             throw new IllegalArgumentException("Damage value must be greater than 0");
@@ -87,6 +108,12 @@ public class Bullet extends Polygon{
             this.damage = damage;
         }
     }
+
+    /**
+     * This method tests for intersections between the Bullet and a Polygon
+     * @param poly This is the Polygon that the Bullet is testing for intersection
+     * @return Returns True if the Bullet intersects, or False if it doesn't
+     */
     public boolean intersects (Polygon poly){
         boolean isIntersect = false;
         int xMax=xpoints[0],yMax=ypoints[0],xMin=xMax,yMin=yMax,polyXMax=poly.xpoints[0],polyYMax=poly.ypoints[0],polyXMin=polyXMax,polyYMin=polyYMax;
@@ -128,6 +155,10 @@ public class Bullet extends Polygon{
         return isIntersect;
     }
     
+    /**
+     * This method is used for finding the center Y value of the Bullet
+     * @return This returns the center Y value of the Bullet
+     */
     public int getCenterY(){
         int sum =0;
         int i = 0;
@@ -138,6 +169,10 @@ public class Bullet extends Polygon{
         return sum/i;
     }
 
+    /**
+     * This method is used for finding the center X value of the Bullet
+     * @return This returns the center X value of the Bullet
+     */
     public int getCenterX() {
         int sum =0;
         int i = 0;
